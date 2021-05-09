@@ -21,13 +21,12 @@
         "deploy": "rc-apps deploy",
         "lint": "eslint . --ext .ts",
         "lintf": "npm run lint -- --fix",
-        "format": "prettier --write \"**/*.{ts,md,json,yml}\""
+        "format": "prettier --write \"**/*.{ts,md,json,yml}\" && git add -A ."
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run format",
-            "pre-push": "npm run lint"
-        }
+    "pre-commit": {
+        "run": [
+            "format"
+        ]
     },
     "devDependencies": {
         "@rocket.chat/apps-engine": "^1.19.0",
@@ -43,6 +42,7 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-prettier": "^3.4.0",
+        "pre-commit": "^1.2.2",
         "prettier": "^2.2.1"
     }
 }
