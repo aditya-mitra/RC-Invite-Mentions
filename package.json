@@ -1,4 +1,25 @@
 {
+  "name": "invite-mentions",
+    "description": "Invite users to channels/private groups/threads when mentioned.",
+    "version": "1.0.1",
+    "main": "InviteMentionsApp.ts",
+    "scripts": {
+        "deploy": "rc-apps deploy"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aditya-mitra/RC-Invite-Mentions.git"
+    },
+    "keywords": [
+        "Rocket.Chat",
+        "Rocket.Chat.App"
+    ],
+    "author": "aditya-mitra",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/aditya-mitra/RC-Invite-Mentions/issues"
+    },
+    "homepage": "https://github.com/aditya-mitra/RC-Invite-Mentions#readme",
     "devDependencies": {
         "@rocket.chat/apps-engine": "^1.19.0",
         "@types/node": "14.14.6",
