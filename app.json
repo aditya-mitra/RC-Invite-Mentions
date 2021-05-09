@@ -2,7 +2,7 @@
     "id": "918576e4-a179-4b04-935e-b01d69601bf5",
     "version": "0.0.1",
     "requiredApiVersion": "^1.4.0",
-    "iconFile": "icon.png",
+    "iconFile": "public/mentions.png",
     "author": {
         "name": "aditya-mitra",
         "homepage": "https://github.com/aditya-mitra/RC-Invite-Mentions",
