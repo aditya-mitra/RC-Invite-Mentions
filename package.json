@@ -1,13 +1,13 @@
 {
     "name": "invite-mentions",
-    "description": "Invite users to channels/private groups/threads when mentioned.",
+    "description": "Rocket.Chat App to add users to channels",
     "version": "1.0.1",
     "main": "InviteMentionsApp.ts",
     "scripts": {
         "deploy": "rc-apps deploy",
-        "lint": "eslint .",
+        "lint": "eslint . --ext .ts",
         "lintf": "npm run lint -- --fix",
-        "format":"prettier --write \"**/*.{ts,md}\""
+        "format": "prettier --write \"**/*.{ts,md}\""
     },
     "repository": {
         "type": "git",
