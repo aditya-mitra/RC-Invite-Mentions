@@ -1,8 +1,42 @@
 {
+    "name": "invite-mentions",
+    "description": "Rocket.Chat App to add users to channels",
+    "version": "1.0.1",
+    "main": "InviteMentionsApp.ts",
+    "scripts": {
+        "deploy": "rc-apps deploy",
+        "lint": "eslint . --ext .ts",
+        "lintf": "npm run lint -- --fix",
+        "format": "prettier --write \"**/*.{ts,md}\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aditya-mitra/RC-Invite-Mentions.git"
+    },
+    "keywords": [
+        "Rocket.Chat",
+        "Rocket.Chat.App"
+    ],
+    "author": "aditya-mitra",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/aditya-mitra/RC-Invite-Mentions/issues"
+    },
+    "homepage": "https://github.com/aditya-mitra/RC-Invite-Mentions#readme",
     "devDependencies": {
         "@rocket.chat/apps-engine": "^1.19.0",
         "@types/node": "14.14.6",
         "tslint": "^5.10.0",
         "typescript": "^4.0.5"
+    },
+    "dependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.22.1",
+        "@typescript-eslint/parser": "^4.22.1",
+        "eslint": "^7.26.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-prettier": "^3.4.0",
+        "prettier": "^2.2.1"
     }
 }
