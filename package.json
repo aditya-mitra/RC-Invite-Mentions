@@ -21,8 +21,7 @@
         "deploy": "rc-apps deploy",
         "lint": "eslint . --ext .ts",
         "lintf": "npm run lint -- --fix",
-        "format": "prettier --write \"**/*.{ts,md,json,yml}\"",
-        "prepare": "husky install"
+        "format": "prettier --write \"**/*.{ts,md,json,yml}\""
     },
     "husky": {
         "hooks": {
@@ -44,7 +43,7 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-prettier": "^3.4.0",
-        "husky": "^6.0.0",
+        "husky": "^4.3.8",
         "prettier": "^2.2.1"
     }
 }
