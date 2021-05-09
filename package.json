@@ -4,7 +4,10 @@
     "version": "1.0.1",
     "main": "InviteMentionsApp.ts",
     "scripts": {
-        "deploy": "rc-apps deploy"
+        "deploy": "rc-apps deploy",
+        "lint": "eslint .",
+        "lintf": "npm run lint -- --fix",
+        "format":"prettier --write \"**/*.{ts,md}\""
     },
     "repository": {
         "type": "git",
