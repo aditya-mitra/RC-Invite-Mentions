@@ -26,7 +26,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "pretty-quick --staged",
+            "pre-commit": "echo \"check 432\" && npm run format",
             "pre-push": "npm run lint"
         }
     },
@@ -45,7 +45,6 @@
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-prettier": "^3.4.0",
         "husky": "^6.0.0",
-        "prettier": "^2.2.1",
-        "pretty-quick": "^3.1.0"
+        "prettier": "^2.2.1"
     }
 }
