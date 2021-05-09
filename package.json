@@ -26,7 +26,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "format"
+            "pre-commit": "echo \"hero\""
         }
     },
     "devDependencies": {
