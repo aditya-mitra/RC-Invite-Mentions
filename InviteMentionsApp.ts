@@ -7,7 +7,7 @@ export default class InviteMentionsApp extends App {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
     }
-    protected async extendConfiguration(configuration: IConfigurationExtend, environmentRead: IEnvironmentRead): Promise<void> {
+    protected async extendConfiguration(configuration: IConfigurationExtend): Promise<void> {
         await Promise.all(settings.map((setting) => configuration.settings.provideSetting(setting)));
     }
 }
