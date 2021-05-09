@@ -1,0 +1,16 @@
+name: ToDo
+
+on: push
+
+jobs:
+    todos:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Add/Remove ToDo as Issue
+              uses: "alstr/todo-to-issue-action@v3.0.2-beta"
+              id: "todos"
+              with:
+                  TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  LABEL: '// TODO'
+                  COMMENT_MARKER: '//'
