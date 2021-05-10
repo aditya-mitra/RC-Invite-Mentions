@@ -15,12 +15,12 @@ interface ISendInviteMessageArgs {
 }
 
 export default class SendInviteMessage {
-	mentionedUser: IUser;
-	block: BlockBuilder;
-	recevingUser: IUser;
-	notify: INotifier;
-	room: IRoom;
-	threadId: string;
+	private mentionedUser: IUser;
+	private block: BlockBuilder;
+	private recevingUser: IUser;
+	private notify: INotifier;
+	private room: IRoom;
+	private threadId: string;
 
 	constructor({
 		mentionedUser,
@@ -43,8 +43,8 @@ export default class SendInviteMessage {
 	private setText() {
 		const { block } = this;
 		block.addSectionBlock({
-			text: block.newMarkdownTextObject(`The mentioned user ${this.mentionedUser.name} is not present in the channel
-    What would you like to do?`)
+			text: block.newMarkdownTextObject(`The mentioned user **${this.mentionedUser.name}** is not present in this room.
+    __What would you like to do?__`)
 		});
 	}
 
@@ -73,7 +73,9 @@ export default class SendInviteMessage {
 			.setAvatarUrl(
 				'https://res.cloudinary.com/gamersinstinct7/image/upload/v1620666920/rc/at.png'
 			)
-			.setRoom(this.room);
+			.setRoom(this.room)
+            .setSender(this.recevingUser)
+            .setUsernameAlias("Mentions")
 
 		if (this.threadId) {
 			builder.setThreadId(this.threadId);
@@ -81,6 +83,8 @@ export default class SendInviteMessage {
 
 		this.setText();
 		this.setButtons();
+
+        builder.setBlocks(this.block.getBlocks());
 
 		await this.notify.notifyUser(this.recevingUser, builder.getMessage());
 	}

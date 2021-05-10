@@ -1,7 +1,7 @@
 {
     "id": "918576e4-a179-4b04-935e-b01d69601bf5",
     "version": "0.0.1",
-    "requiredApiVersion": "^1.4.0",
+    "requiredApiVersion": "^1.19.0",
     "iconFile": "public/mentions.png",
     "author": {
         "name": "aditya-mitra",
@@ -11,5 +11,6 @@
     "name": "invite-mentions",
     "nameSlug": "invite-mentions",
     "classFile": "InviteMentionsApp.ts",
-    "description": "Add users to channel via Mentions"
+    "description": "Add users to channel via Mentions",
+    "implements": []
 }
