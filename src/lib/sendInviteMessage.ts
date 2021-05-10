@@ -16,10 +16,15 @@ interface ISendInviteMessageArgs {
 
 export default class SendInviteMessage {
 	private mentionedUser: IUser;
+
 	private block: BlockBuilder;
+
 	private recevingUser: IUser;
+
 	private notify: INotifier;
+
 	private room: IRoom;
+
 	private threadId: string;
 
 	constructor({
@@ -66,7 +71,7 @@ export default class SendInviteMessage {
 		});
 	}
 
-	public async sendMessage() {
+	public async sendMessage(): Promise<void> {
 		const builder = this.notify.getMessageBuilder();
 
 		builder
@@ -74,8 +79,8 @@ export default class SendInviteMessage {
 				'https://res.cloudinary.com/gamersinstinct7/image/upload/v1620666920/rc/at.png'
 			)
 			.setRoom(this.room)
-            .setSender(this.recevingUser)
-            .setUsernameAlias("Mentions")
+			.setSender(this.recevingUser)
+			.setUsernameAlias('Mentions');
 
 		if (this.threadId) {
 			builder.setThreadId(this.threadId);
@@ -84,7 +89,7 @@ export default class SendInviteMessage {
 		this.setText();
 		this.setButtons();
 
-        builder.setBlocks(this.block.getBlocks());
+		builder.setBlocks(this.block.getBlocks());
 
 		await this.notify.notifyUser(this.recevingUser, builder.getMessage());
 	}

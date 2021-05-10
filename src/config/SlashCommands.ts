@@ -1,4 +1,4 @@
-import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
+import { IModify, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import {
 	ISlashCommand,
 	SlashCommandContext
@@ -16,18 +16,10 @@ export default class TestCommand implements ISlashCommand {
 
 	public providesPreview = false;
 
-	public async executor(
-		ctx: SlashCommandContext,
-		read: IRead,
-		modify: IModify,
-		http: IHttp,
-		persist: IPersistence
-	): Promise<void> {
-		const choice = ctx.getArguments()[0];
-
+	public async executor(ctx: SlashCommandContext, _read: IRead, modify: IModify): Promise<void> {
 		const testUser = {
 			username: 'my-invite-test-user',
-            name: 'MyInvite TestUser'
+			name: 'MyInvite TestUser'
 		} as IUser;
 
 		const sendInvite = new SendInviteMessage({
@@ -39,6 +31,6 @@ export default class TestCommand implements ISlashCommand {
 			threadId: ctx.getThreadId()
 		});
 
-        sendInvite.sendMessage();
+		sendInvite.sendMessage();
 	}
 }
