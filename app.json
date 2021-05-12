@@ -12,5 +12,8 @@
     "nameSlug": "invite-mentions",
     "classFile": "InviteMentionsApp.ts",
     "description": "Add users to channel via Mentions",
-    "implements": []
+    "implements": [
+        "IPostMessageSent",
+        "IUIKitInteractionHandler"
+    ]
 }

@@ -62,10 +62,6 @@ export default class SendInviteMessage {
 					actionId: inviteMessageActions.addUser,
 					value: this.mentionedUser.username,
 					style: ButtonStyle.PRIMARY
-				}),
-				block.newButtonElement({
-					text: block.newPlainTextObject('Do Nothing'),
-					actionId: inviteMessageActions.doNothing
 				})
 			]
 		});
