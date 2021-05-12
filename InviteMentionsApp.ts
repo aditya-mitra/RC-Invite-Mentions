@@ -7,7 +7,7 @@ import {
 } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IMessage, IPostMessageSent } from '@rocket.chat/apps-engine/definition/messages';
-import { settings } from './src/config/Settings';
+import settings from './src/config/Settings';
 import TestCommand from './src/config/SlashCommands';
 import PostMessageSentHandler from './src/handlers/PostMessageSentHandler';
 
