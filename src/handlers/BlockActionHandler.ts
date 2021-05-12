@@ -1,10 +1,4 @@
-import {
-	IHttp,
-	IModify,
-	IModifyUpdater,
-	IPersistence,
-	IRead
-} from '@rocket.chat/apps-engine/definition/accessors';
+import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { IUser } from '@rocket.chat/apps-engine/definition/users';
 import {
 	IUIKitResponse,
@@ -38,20 +32,18 @@ export default class BlockActionHandler {
 	}
 
 	private async addUserToRoom(username: string): Promise<void> {
-		console.log('came here', username, this.contextRoom.id, this.contextUser.username);
-
 		const updater = this.modify.getUpdater();
 
-		const roomBuilder = await updater.room(this.contextRoom.id, this.contextUser);
-		roomBuilder.addMemberToBeAddedByUsername(username);
+		const roomBuilder = (
+			await updater.room(this.contextRoom.id, this.contextUser)
+		).addMemberToBeAddedByUsername(username);
 
 		await updater.finish(roomBuilder);
 	}
 
-	private async updateMessage() {}
 
 	public async handleBlockAction(): Promise<IUIKitResponse> {
-		const { ctx, contextRoom, addUserToRoom } = this;
+		const { ctx, contextRoom } = this;
 
 		const { value, actionId } = ctx.getInteractionData();
 
@@ -59,7 +51,7 @@ export default class BlockActionHandler {
 			await this.addUserToRoom(value);
 			return { success: true };
 		}
-		console.log('failder');
+
 		return { success: false };
 	}
 }
