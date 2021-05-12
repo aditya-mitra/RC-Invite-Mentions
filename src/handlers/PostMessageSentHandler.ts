@@ -11,7 +11,9 @@ export class PostMessageSentHandler {
 		var allMentions = messageText.match(mentionsRegex);
 		if (allMentions && allMentions.length) {
 			allMentions = allMentions.map((match)=> match.slice(1));
-			
+			allMentions.map((userName) => {
+				this.read.getUserReader().getByUsername(userName).then((res) => console.log("details", res))
+			})
 		}
 		this.app.getLogger().debug("testing" , allMentions ? allMentions : 'Null') // If NULL is given to LOGS app crashed so checking
 	}
