@@ -1,4 +1,4 @@
-import { IAppAccessors, IConfigurationExtend, ILogger, IRead } from '@rocket.chat/apps-engine/definition/accessors';
+import { IAppAccessors, IConfigurationExtend, IHttp, ILogger, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IMessage, IPostMessageSent } from '@rocket.chat/apps-engine/definition/messages';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
@@ -12,9 +12,12 @@ export default class InviteMentionsApp extends App implements IPostMessageSent {
 
 	async executePostMessageSent(
 		message: IMessage,
-		read: IRead
+		read: IRead,
+		http: IHttp,
+		persistence: IPersistence,
+		modify: IModify
 	): Promise<void> {
-		const postMessageHandler = new PostMessageSentHandler(this, message, read);
+		const postMessageHandler = new PostMessageSentHandler(this, message, read, modify);
 		postMessageHandler.run();
 	}
 
