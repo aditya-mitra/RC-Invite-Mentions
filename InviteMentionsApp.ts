@@ -9,12 +9,13 @@ import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IMessage, IPostMessageSent } from '@rocket.chat/apps-engine/definition/messages';
 import {
 	IUIKitInteractionHandler,
+	IUIKitResponse,
 	UIKitBlockInteractionContext
 } from '@rocket.chat/apps-engine/definition/uikit';
 
 import settings from './src/config/Settings';
 import TestCommand from './src/config/SlashCommands';
-import handleBlockAction from './src/handlers/BlockActionHandler';
+import BlockActionHandler from './src/handlers/BlockActionHandler';
 import PostMessageSentHandler from './src/handlers/PostMessageSentHandler';
 
 export default class InviteMentionsApp
@@ -37,8 +38,8 @@ export default class InviteMentionsApp
 		http: IHttp,
 		persist: IPersistence,
 		modify: IModify
-	) {
-		return handleBlockAction(ctx, read, http, persist, modify);
+	): Promise<IUIKitResponse> {
+		return new BlockActionHandler(ctx, read, http, persist, modify).handleBlockAction();
 	}
 
 	protected async extendConfiguration(configuration: IConfigurationExtend): Promise<void> {

@@ -1,30 +1,65 @@
-import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
+import {
+	IHttp,
+	IModify,
+	IModifyUpdater,
+	IPersistence,
+	IRead
+} from '@rocket.chat/apps-engine/definition/accessors';
+import { IUser } from '@rocket.chat/apps-engine/definition/users';
 import {
 	IUIKitResponse,
 	UIKitBlockInteractionContext
 } from '@rocket.chat/apps-engine/definition/uikit';
+
 import { inviteMessageActions } from '../utils/enums';
+import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
 
-export default async function handleBlockAction(
-	ctx: UIKitBlockInteractionContext,
-	read: IRead,
-	http: IHttp,
-	persist: IPersistence,
-	modify: IModify
-): Promise<IUIKitResponse> {
-	const { value, user, room, actionId } = ctx.getInteractionData();
+export default class BlockActionHandler {
+	private contextUser: IUser;
+	private contextRoom: IRoom;
+	private modify: IModify;
+	private ctx: UIKitBlockInteractionContext;
 
-	if (actionId !== inviteMessageActions.addUser || !value || !room) {
-		return { success: false };
+	constructor(
+		ctx: UIKitBlockInteractionContext,
+		read: IRead,
+		_http: IHttp,
+		_persist: IPersistence,
+		modify: IModify
+	) {
+		this.ctx = ctx;
+		this.modify = modify;
+		this.contextUser = ctx.getInteractionData().user;
+
+		const contextRoom = ctx.getInteractionData().room;
+		if (contextRoom) {
+			this.contextRoom = contextRoom;
+		}
 	}
 
-	const updater = modify.getUpdater();
+	private async addUserToRoom(username: string): Promise<void> {
+		console.log('came here', username, this.contextRoom.id, this.contextUser.username);
 
-	const roomBuilder = await updater.room(room.id, user);
+		const updater = this.modify.getUpdater();
 
-	roomBuilder.addMemberToBeAddedByUsername(value);
+		const roomBuilder = await updater.room(this.contextRoom.id, this.contextUser);
+		roomBuilder.addMemberToBeAddedByUsername(username);
 
-	await updater.finish(roomBuilder);
+		await updater.finish(roomBuilder);
+	}
 
-	return { success: true };
+	private async updateMessage() {}
+
+	public async handleBlockAction(): Promise<IUIKitResponse> {
+		const { ctx, contextRoom, addUserToRoom } = this;
+
+		const { value, actionId } = ctx.getInteractionData();
+
+		if (actionId === inviteMessageActions.addUser && !!value && !!contextRoom) {
+			await this.addUserToRoom(value);
+			return { success: true };
+		}
+		console.log('failder');
+		return { success: false };
+	}
 }
