@@ -62,7 +62,7 @@ export default class SendInviteMessage {
 					actionId: inviteMessageActions.addUser,
 					value: this.mentionedUser.username,
 					style: ButtonStyle.PRIMARY
-				}),
+				})
 			]
 		});
 	}

@@ -5,13 +5,16 @@ import {
 	UIKitBlockInteractionContext
 } from '@rocket.chat/apps-engine/definition/uikit';
 
-import { inviteMessageActions } from '../utils/enums';
 import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
+import { inviteMessageActions } from '../utils/enums';
 
 export default class BlockActionHandler {
 	private contextUser: IUser;
+
 	private contextRoom: IRoom;
+
 	private modify: IModify;
+
 	private ctx: UIKitBlockInteractionContext;
 
 	constructor(
@@ -40,7 +43,6 @@ export default class BlockActionHandler {
 
 		await updater.finish(roomBuilder);
 	}
-
 
 	public async handleBlockAction(): Promise<IUIKitResponse> {
 		const { ctx, contextRoom } = this;
