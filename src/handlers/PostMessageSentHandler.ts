@@ -1,9 +1,9 @@
 import { IModify, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { IApp } from '@rocket.chat/apps-engine/definition/IApp';
 import { IMessage } from '@rocket.chat/apps-engine/definition/messages';
-import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
 
 import SendInviteMessage from '../lib/sendInviteMessage';
+
 export default class PostMessageSentHandler {
 	private roomMemberUsernames: string[] = [];
 
@@ -16,7 +16,7 @@ export default class PostMessageSentHandler {
 		this.message = message;
 	}
 
-	/**send message to the user only if not in room */
+	/** send message to the user only if not in room */
 	private async sendMessageToUser(username: string): Promise<void> {
 		const user = await this.read.getUserReader().getByUsername(username);
 		if (user && !this.roomMemberUsernames.includes(user.username)) {
@@ -46,6 +46,6 @@ export default class PostMessageSentHandler {
 
 		await Promise.all(matchedUsernames.map((username) => this.sendMessageToUser(username)))
 			// TODO: refactor `this console error into `app's logging`
-			.catch((e) => console.log(e));
+			.catch((e) => console.log(e)); // eslint-disable-line no-console
 	}
 }
