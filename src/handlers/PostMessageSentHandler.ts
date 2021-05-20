@@ -37,7 +37,7 @@ export default class PostMessageSentHandler {
 		const roomMembers = await this.read.getRoomReader().getMembers(this.message.room.id);
 		this.roomMemberUsernames = roomMembers.map((roomMember) => roomMember.username);
 
-		const mentionsRegex = new RegExp('@([a-zA-Z0-9_.]+)', 'gim');
+		const mentionsRegex = new RegExp('@(?:[a-zA-Z0-9_.-]+)', 'gim');
 
 		const matchedUsernames = messageText.match(mentionsRegex)?.map((match) => match.slice(1));
 		if (!matchedUsernames || matchedUsernames.length === 0) {
