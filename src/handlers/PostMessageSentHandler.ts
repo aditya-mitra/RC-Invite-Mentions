@@ -6,7 +6,6 @@ import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
 import SendInviteMessage from '../lib/sendInviteMessage';
 export default class PostMessageSentHandler {
 	private roomMemberUsernames: string[] = [];
-	private currentRoom: IRoom;
 
 	constructor(
 		private _app: IApp,
@@ -26,16 +25,16 @@ export default class PostMessageSentHandler {
 				receivingUser: this.message.sender,
 				block: this.modify.getCreator().getBlockBuilder(),
 				notify: this.modify.getNotifier(),
-				room: this.currentRoom
+				room: this.message.room,
+				threadId: this.message.threadId
 			}).sendMessage();
 		}
 	}
 
 	public async run(): Promise<void> {
 		const messageText = this.message.text || '';
-		this.currentRoom = this.message.room;
 
-		const roomMembers = await this.read.getRoomReader().getMembers(this.currentRoom.id);
+		const roomMembers = await this.read.getRoomReader().getMembers(this.message.room.id);
 		this.roomMemberUsernames = roomMembers.map((roomMember) => roomMember.username);
 
 		const mentionsRegex = new RegExp('@([a-zA-Z0-9_.]+)', 'gim');
