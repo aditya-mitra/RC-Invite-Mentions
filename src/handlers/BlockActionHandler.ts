@@ -4,8 +4,8 @@ import {
 	IUIKitResponse,
 	UIKitBlockInteractionContext
 } from '@rocket.chat/apps-engine/definition/uikit';
-
 import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
+
 import { inviteMessageActions } from '../utils/enums';
 
 export default class BlockActionHandler {
