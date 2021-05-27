@@ -1,4 +1,5 @@
 import { ISetting, SettingType } from '@rocket.chat/apps-engine/definition/settings';
+
 import { AppSetting } from '../utils/enums';
 
 const settings: Array<ISetting> = [
